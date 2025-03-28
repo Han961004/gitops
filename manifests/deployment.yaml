@@ -1,28 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-django-app
-  labels:
-    app: my-django-app
+  name: argocd-repo-server
+  namespace: argocd
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: my-django-app
+      app.kubernetes.io/name: argocd-repo-server
   template:
     metadata:
       labels:
-        app: my-django-app
+        app.kubernetes.io/name: argocd-repo-server
     spec:
       containers:
-      - name: django
-        image: docker.io/donghk77454/django-app:latest
-        ports:
-        - containerPort: 8080
+      - name: argocd-repo-server
+        image: argoproj/argocd-repo-server:v2.14.6  # 사용 중인 버전에 맞게 조정
         resources:
           requests:
-            cpu: "250m"
-            memory: "512Mi"
-          limits:
             cpu: "500m"
             memory: "1Gi"
+          limits:
+            cpu: "1"
+            memory: "2Gi"
