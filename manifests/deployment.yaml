@@ -1,22 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: django-deployment
+  name: my-django-app
   labels:
-    app: django
+    app: my-django-app
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: django
+      app: my-django-app
   template:
     metadata:
       labels:
-        app: django
+        app: my-django-app
     spec:
       containers:
       - name: django
-        # Docker Hub에 푸시한 이미지 경로를 지정합니다.
         image: docker.io/donghk77454/django-app:latest
         ports:
         - containerPort: 8000
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"
