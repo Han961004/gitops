@@ -1,0 +1,32 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+*.egg-info/
+
+# Django settings
+*.log
+*.pot
+*.pyc
+
+# Database files
+db.sqlite3
+
+# Static files
+/static/
+
+# Media files
+/media/
+
+# Django migrations
+*/migrations/
+
+# IDE settings
+.idea/
+.vscode/
+
+# Env files
+*.env
