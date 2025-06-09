@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   grafana:
   - apiVersion: v2
-    created: "2025-06-09T16:55:41.70976295+09:00"
+    created: "2025-06-09T17:51:54.536221989+09:00"
     dependencies:
     - name: grafana
       repository: https://grafana.github.io/helm-charts
@@ -13,9 +13,22 @@ entries:
     urls:
     - https://han961004.github.io/gitops/grafana-0.1.0.tgz
     version: 0.1.0
+  nginx:
+  - apiVersion: v2
+    created: "2025-06-09T17:51:54.539504168+09:00"
+    dependencies:
+    - name: ingress-nginx
+      repository: https://kubernetes.github.io/ingress-nginx
+      version: 4.10.0
+    description: NGINX Ingress Controller
+    digest: d96a833e797e73a0034961e013a91a987231ec555165baae669aa9b629b24a6f
+    name: nginx
+    urls:
+    - https://han961004.github.io/gitops/nginx-0.1.0.tgz
+    version: 0.1.0
   prometheus:
   - apiVersion: v2
-    created: "2025-06-09T16:55:41.718044373+09:00"
+    created: "2025-06-09T17:51:54.547374561+09:00"
     dependencies:
     - name: prometheus
       repository: https://prometheus-community.github.io/helm-charts
@@ -26,4 +39,4 @@ entries:
     urls:
     - https://han961004.github.io/gitops/prometheus-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-09T16:55:41.705439952+09:00"
+generated: "2025-06-09T17:51:54.533489706+09:00"
