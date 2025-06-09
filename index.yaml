@@ -25,7 +25,7 @@ entries:
     name: loki
     type: application
     urls:
-    - https://han961004.github.io/gitops/loki/loki-0.1.0.tgz
+    - https://han961004.github.io/gitops/loki-0.1.0.tgz
     version: 0.1.0
   nginx:
   - apiVersion: v2
