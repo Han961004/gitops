@@ -1,0 +1,29 @@
+apiVersion: v1
+entries:
+  grafana:
+  - apiVersion: v2
+    created: "2025-06-09T16:55:41.70976295+09:00"
+    dependencies:
+    - name: grafana
+      repository: https://grafana.github.io/helm-charts
+      version: 7.3.10
+    description: Standalone Grafana
+    digest: 1ebf8284ad0dd70ad24fe2d9dfe2ac38746921247aca634c346b92d3a51f214c
+    name: grafana
+    urls:
+    - https://han961004.github.io/gitops/grafana-0.1.0.tgz
+    version: 0.1.0
+  prometheus:
+  - apiVersion: v2
+    created: "2025-06-09T16:55:41.718044373+09:00"
+    dependencies:
+    - name: prometheus
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 25.21.0
+    description: Standalone Prometheus
+    digest: 8235faa2c94933a2f076f698337b7a03446ac1bb3cd998bfbfc8957584c1e3a1
+    name: prometheus
+    urls:
+    - https://han961004.github.io/gitops/prometheus-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-06-09T16:55:41.705439952+09:00"
