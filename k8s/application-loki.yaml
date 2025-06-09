@@ -9,6 +9,9 @@ spec:
     repoURL: https://han961004.github.io/gitops
     chart: loki
     targetRevision: 0.1.0
+    helm:
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
