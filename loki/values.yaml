@@ -1,8 +1,11 @@
 loki:
-  auth_enabled: false
-
   storage:
-    type: filesystem
+    bucketNames:
+      chunks: dummy-chunks
+      ruler: dummy-ruler
+      admin: dummy-admin
+
+  auth_enabled: false
 
   storage_config:
     boltdb:
