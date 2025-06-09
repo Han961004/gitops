@@ -3,6 +3,10 @@ loki:
 
   storage:
     type: filesystem
+    bucketNames:
+      chunks: dummy-chunks
+      ruler: dummy-ruler
+      admin: dummy-admin
 
   storage_config:
     boltdb:
@@ -22,3 +26,4 @@ loki:
 
   commonConfig:
     replication_factor: 1
+
