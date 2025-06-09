@@ -1,14 +1,12 @@
 loki:
   auth_enabled: false
-
   storage:
-    type: filesystem
+    filesystem:
+      directory: /var/loki
     bucketNames:
       chunks: chunks
       ruler: ruler
       admin: admin
-    filesystem:
-      directory: /var/loki
 
   schemaConfig:
     configs:
