@@ -13,12 +13,12 @@ loki:
   schemaConfig:
     configs:
       - from: 2024-01-01
-        store: boltdb-shipper     # 단일 노드 운영 시 적절한 저장 방식
+        store: tsdb     # 단일 노드 운영 시 적절한 저장 방식
         object_store: filesystem  # 파일 시스템에 객체 저장
-        schema: v12               # v11 → v12/v13으로 최신화 (v13은 tsdb 기반, v12는 안정성 더 높음)
+        schema: v13               # v11 → v12/v13으로 최신화 (v13은 tsdb 기반, v12는 안정성 더 높음)
         index:
           prefix: index_          # 인덱스 파일 접두어
-          period: 168h            # 인덱스 주기 (1주)
+          period: 24h            # 인덱스 주기 (1주)
 
   commonConfig:
     replication_factor: 1         # 복제본 1개 (싱글 노드 운영 환경)
