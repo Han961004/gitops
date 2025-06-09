@@ -6,12 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/han961004/gitops
-    targetRevision: main                  # 또는 main 브랜치가 아니라면 해당 브랜치명
-    path: loki                            # loki 디렉토리에 Chart.yaml, values.yaml 포함되어야 함
-    helm:
-      valueFiles:
-        - values.yaml                    # loki/values.yaml 사용
+    repoURL: https://han961004.github.io/gitops
+    chart: loki
+    targetRevision: 0.1.0
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
