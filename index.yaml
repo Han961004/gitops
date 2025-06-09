@@ -1,56 +1,40 @@
 apiVersion: v1
 entries:
-  grafana:
-  - apiVersion: v2
-    created: "2025-06-10T02:31:28.661372779+09:00"
-    dependencies:
-    - name: grafana
-      repository: https://grafana.github.io/helm-charts
-      version: 7.3.10
-    description: Standalone Grafana
-    digest: 1ebf8284ad0dd70ad24fe2d9dfe2ac38746921247aca634c346b92d3a51f214c
-    name: grafana
-    urls:
-    - https://han961004.github.io/gitops/grafana-0.1.0.tgz
-    version: 0.1.0
   loki:
   - apiVersion: v2
-    created: "2025-06-10T02:31:28.676717138+09:00"
+    appVersion: 3.0.0
+    created: "2025-06-10T02:24:24.805102698+09:00"
     dependencies:
-    - name: loki
+    - alias: minio
+      condition: minio.enabled
+      name: minio
+      repository: https://charts.min.io/
+      version: 4.0.15
+    - alias: grafana-agent-operator
+      condition: monitoring.selfMonitoring.grafanaAgent.installOperator
+      name: grafana-agent-operator
       repository: https://grafana.github.io/helm-charts
-      version: 6.6.3
-    description: Loki - log aggregation system by Grafana Labs
-    digest: e964721a49afb2222200c1540e91023b6fd7bc3ca4f80c5cad2da95b766ef328
+      version: 0.3.15
+    - alias: rollout_operator
+      condition: rollout_operator.enabled
+      name: rollout-operator
+      repository: https://grafana.github.io/helm-charts
+      version: 0.13.0
+    description: Helm chart for Grafana Loki and Grafana Enterprise Logs supporting
+      both simple, scalable and distributed modes.
+    digest: a57207a79c08057bbdf5cbd073f33698ee6133ed6adbaec5b3a4b81dfba8dc22
+    home: https://grafana.github.io/helm-charts
+    icon: https://grafana.com/docs/loki/latest/logo_and_name.png
+    maintainers:
+    - name: trevorwhitney
+    - name: jeschkies
     name: loki
+    sources:
+    - https://github.com/grafana/loki
+    - https://grafana.com/oss/loki/
+    - https://grafana.com/docs/loki/latest/
     type: application
     urls:
-    - https://han961004.github.io/gitops/loki-0.1.0.tgz
-    version: 0.1.0
-  nginx:
-  - apiVersion: v2
-    created: "2025-06-10T02:31:28.680399369+09:00"
-    dependencies:
-    - name: ingress-nginx
-      repository: https://kubernetes.github.io/ingress-nginx
-      version: 4.10.0
-    description: NGINX Ingress Controller
-    digest: d96a833e797e73a0034961e013a91a987231ec555165baae669aa9b629b24a6f
-    name: nginx
-    urls:
-    - https://han961004.github.io/gitops/nginx-0.1.0.tgz
-    version: 0.1.0
-  prometheus:
-  - apiVersion: v2
-    created: "2025-06-10T02:31:28.689389642+09:00"
-    dependencies:
-    - name: prometheus
-      repository: https://prometheus-community.github.io/helm-charts
-      version: 25.21.0
-    description: Standalone Prometheus
-    digest: 8235faa2c94933a2f076f698337b7a03446ac1bb3cd998bfbfc8957584c1e3a1
-    name: prometheus
-    urls:
-    - https://han961004.github.io/gitops/prometheus-0.1.0.tgz
-    version: 0.1.0
-generated: "2025-06-10T02:31:28.658502561+09:00"
+    - https://han961004.github.io/gitops/charts/loki-6.6.3.tgz
+    version: 6.6.3
+generated: "2025-06-10T02:24:24.776998445+09:00"
