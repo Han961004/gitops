@@ -1,22 +1,24 @@
 loki:
-  auth_enabled: false
+  auth_enabled: false  # 인증 기능 비활성화 (로컬/개발 환경에서는 꺼두는 것이 일반적)
+
   storage:
-    filesystem:
-      directory: /var/loki
+    type: filesystem  # 로컬 파일시스템에 로그 저장
     bucketNames:
-      chunks: chunks
-      ruler: ruler
-      admin: admin
+      chunks: loki-chunks   # 청크 데이터 저장 버킷 (필수값, 안 넣으면 템플릿 에러 발생)
+      ruler: loki-ruler     # ruler 기능 관련 버킷 (현재 ruler 미사용이라도 필수로 입력)
+      admin: loki-admin     # admin 기능용 버킷 (GEL 등에서 사용되나 여기선 placeholder)
+    filesystem:
+      directory: /var/loki  # 실제 로그가 저장되는 로컬 디렉토리 경로 (PVC가 mount될 위치)
 
   schemaConfig:
     configs:
-      - from: 2020-10-24
-        store: boltdb
-        object_store: filesystem
-        schema: v11
+      - from: 2024-01-01
+        store: boltdb-shipper     # 단일 노드 운영 시 적절한 저장 방식
+        object_store: filesystem  # 파일 시스템에 객체 저장
+        schema: v12               # v11 → v12/v13으로 최신화 (v13은 tsdb 기반, v12는 안정성 더 높음)
         index:
-          prefix: index_
-          period: 168h
+          prefix: index_          # 인덱스 파일 접두어
+          period: 168h            # 인덱스 주기 (1주)
 
   commonConfig:
-    replication_factor: 1
+    replication_factor: 1         # 복제본 1개 (싱글 노드 운영 환경)
