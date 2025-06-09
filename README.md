@@ -27,6 +27,7 @@
 
 ## 📂 디렉토리 구조
 
+```bash
 gitops/
 ├── index.yaml # Helm 저장소 인덱스
 ├── grafana/ # Grafana Helm 차트
@@ -40,6 +41,7 @@ gitops/
 │ ├── application-loki.yaml
 │ ├── application-nginx.yaml
 │ └── application-drf.yaml
+```
 
 ## 🌐 서비스 주소 예시
 
