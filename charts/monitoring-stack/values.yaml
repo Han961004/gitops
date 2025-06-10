@@ -10,13 +10,11 @@ ingress-nginx:
     metrics:
       enabled: true
 
-    # Admission Webhook 완전 비활성화
     admissionWebhooks:
-      enabled: false       # ValidatingWebhookConfiguration 생성 자체를 끕니다
+      enabled: false       # ValidatingWebhookConfiguration 생성 비활성화
       patch:
-        enabled: false     # 설치 시 초기 패치용 Job도 끕니다
-      # (Chart 버전에 따라 추가로)
-      # purgeWebhookResources: true  # 필요 시 기존 리소스까지 삭제
+        enabled: false     # 초기 패치용 Job 비활성화
+      purgeWebhookResources: true  # 이미 존재하는 웹훅 리소스까지 삭제
 
 # ───────────────────────────────────────────────────────────────
 # 2) Prometheus 설정
