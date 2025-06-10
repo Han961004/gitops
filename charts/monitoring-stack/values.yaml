@@ -47,25 +47,26 @@ grafana:
 
 # 4) Loki 설정
 loki:
+  # 1) commonConfig 비워서 기본 오브젝트스토리지 로직 스킵
   commonConfig: {}
+
+  # 2) enterprise 기능 비활성화
   enterprise:
     enabled: false
     config: {}
 
+  # 3) Helm 헬퍼가 기대하는 bucketNames 채워주기 (dummy 값이라도 됨)
+  storage:
+    bucketNames:
+      chunks: loki-chunks
+      indexes: loki-indexes
+
+  # 4) config 아래에 로컬 filesystem 스토리지 설정
   config:
     auth_enabled: false
     server:
       http_listen_port: 3100
 
-    # 로컬 filesystem 스토리지 설정
-    storage_config:
-      boltdb_shipper:
-        shared_store: filesystem
-        active_index_directory: /data/loki/index
-      filesystem:
-        directory: /data/loki/chunks
-
-    # (예시) 스키마 설정
     schema_config:
       configs:
         - from: 2020-10-24
@@ -75,3 +76,16 @@ loki:
           index:
             prefix: index_
             period: 168h
+
+    ruler:
+      storage:
+        type: local
+        local:
+          directory: /data/loki/rules
+
+    storage_config:
+      boltdb_shipper:
+        shared_store: filesystem
+        active_index_directory: /data/loki/index
+      filesystem:
+        directory: /data/loki/chunks
