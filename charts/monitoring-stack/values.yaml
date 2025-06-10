@@ -14,19 +14,21 @@ prometheus:
   alertmanager:
     ingress:
       enabled: true
+      # 호스트는 문자열 리스트로 지정
       hosts:
-        - host: prometheus.example.com
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
+        - prometheus.example.com
+      # 경로도 단일 문자열로 지정
+      path: /
+      # (차트 버전이 지원하면) pathType 설정 가능
+      # pathType: Prefix
+
   server:
     ingress:
       enabled: true
       hosts:
-        - host: prometheus.example.com
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
+        - prometheus.example.com
+      path: /
+      # pathType: Prefix  # 필요시 활성화
 
 # 3) Grafana 설정
 grafana:
