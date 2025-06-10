@@ -62,6 +62,9 @@ loki:
     enabled: false
     config: {}
 
+  commonConfig: {}
+
+
   # 3) 기존 config는 여기에만 작성
   config:
     auth_enabled: false
