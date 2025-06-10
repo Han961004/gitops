@@ -47,15 +47,43 @@ grafana:
 
 # 4) Loki 설정
 loki:
-  # (기존 ingress 등 다른 설정은 그대로 두시고 아래만 추가/변경)
+  # 1) 오브젝트 스토리지 대신 로컬 파일시스템 사용
+  storage_config:
+    boltdb_shipper:
+      # 인덱스 저장 폴더
+      active_index_directory: /data/loki/index
+      shared_store: filesystem
+    filesystem:
+      # 청크 저장 폴더
+      directory: /data/loki/chunks
+
+  # 2) enterprise 기능 비활성화 (tpl 함수 에러 방지)
+  enterprise:
+    enabled: false
+    config: {}
+
+  # 3) 기존 config는 여기에만 작성
   config:
-    # ... (schema_config, rulerConfig 등 기존 config 설정)
-    storage_config:
-      boltdb_shipper:
-        # 인덱스 데이터를 저장할 로컬 디렉토리
-        active_index_directory: /data/loki/index
-        # BoltDB-Shipper가 공유 스토어로 사용할 모드 설정
-        shared_store: filesystem
-      filesystem:
-        # 청크(chunk) 파일을 저장할 로컬 디렉토리
-        directory: /data/loki/chunks
+    auth_enabled: false
+
+    server:
+      http_listen_port: 3100
+
+    schema_config:
+      # (필요한 schema_config 작성)
+      configs:
+        - from: 2020-10-24
+          store: boltdb-shipper
+          object_store: filesystem
+          schema: v11
+          index:
+            prefix: index_
+            period: 168h
+
+    ruler:
+      storage:
+        type: local
+        local:
+          directory: /data/loki/rules
+
+    # ...그 외 필요한 설정 계속...
