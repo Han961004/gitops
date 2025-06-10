@@ -20,5 +20,5 @@ dependencies:
     repository: "https://grafana.github.io/helm-charts"
 
   - name: loki-stack
-    version: "2.18.0"                  # 예시 버전
+    version: "2.10.2"                # ← 여기만 2.10.2 로 맞춰주세요
     repository: "https://grafana.github.io/helm-charts"
