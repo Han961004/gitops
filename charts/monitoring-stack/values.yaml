@@ -11,23 +11,25 @@ ingress-nginx:
 
 # 2) Prometheus 설정
 prometheus:
+  # 1) main Prometheus Server Ingress
+  ingress:
+    enabled: true
+    # 문자열 리스트
+    hosts:
+      - prometheus.example.com
+    # 단일 문자열
+    path: /
+    # (차트가 지원하면) pathType 설정
+    pathType: ImplementationSpecific
+
+  # 2) Alertmanager만 따로 Ingress가 필요하다면
   alertmanager:
     ingress:
       enabled: true
       hosts:
-        - host: prometheus.example.com    # 문자열이 아니라 map[string]string
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-
-  server:
-    ingress:
-      enabled: true
-      hosts:
-        - host: prometheus.example.com
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
+        - prometheus.example.com
+      path: /
+      pathType: ImplementationSpecific
 
 # 3) Grafana 설정
 grafana:
