@@ -5,13 +5,14 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
-    repoURL: https://github.com/Han961004/gitops.git
+    repoURL: "https://github.com/Han961004/gitops.git"
     targetRevision: main
     path: charts/monitoring-stack
 
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
     namespace: monitoring
 
   syncPolicy:
