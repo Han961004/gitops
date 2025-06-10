@@ -7,11 +7,13 @@ spec:
   project: default
   source:
     repoURL: https://han961004.github.io/gitops.git
-    targetRevision: HEAD
-    path: .
+    targetRevision: main
+    path: charts/monitoring-stack
+
   destination:
-    server: https://kubernetes.default.svc
+    server: 'https://kubernetes.default.svc'
     namespace: monitoring
+
   syncPolicy:
     automated:
       prune: true

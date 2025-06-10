@@ -1,0 +1,20 @@
+apiVersion: v2
+name: monitoring-stack
+description: "Umbrella chart for Prometheus, Grafana, Loki & nginx-ingress"
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
+dependencies:
+  - name: ingress-nginx
+    version: "4.11.0"
+    repository: "https://kubernetes.github.io/ingress-nginx"
+  - name: prometheus
+    version: "45.3.0"
+    repository: "https://prometheus-community.github.io/helm-charts"
+  - name: grafana
+    version: "6.54.0"
+    repository: "https://grafana.github.io/helm-charts"
+  - name: loki
+    version: "6.11.0"
+    repository: "https://grafana.github.io/loki/charts"

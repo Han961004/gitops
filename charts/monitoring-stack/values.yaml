@@ -1,0 +1,49 @@
+# 공통 네임스페이스
+namespace: monitoring
+
+# 1) nginx-ingress 설정
+ingress-nginx:
+  controller:
+    service:
+      type: LoadBalancer
+    metrics:
+      enabled: true
+
+# 2) Prometheus 설정
+prometheus:
+  alertmanager:
+    ingress:
+      enabled: true
+      hosts:
+        - prometheus.example.com
+  server:
+    ingress:
+      enabled: true
+      hosts:
+        - prometheus.example.com
+
+# 3) Grafana 설정
+grafana:
+  admin:
+    existingSecret: grafana-admin-credentials
+  ingress:
+    enabled: true
+    hosts:
+      - grafana.example.com
+  sidecar:
+    dashboards:
+      enabled: true
+    datasources:
+      enabled: true
+      defaultDatasourceEnabled: true
+
+# 4) Loki 설정
+loki:
+  ingress:
+    enabled: true
+    hosts:
+      - loki.example.com
+  config:
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 24h
