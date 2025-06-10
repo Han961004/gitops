@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://han961004.github.io/gitops.git
+    repoURL: https://github.com/Han961004/gitops.git
     targetRevision: main
     path: charts/monitoring-stack
 
