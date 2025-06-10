@@ -47,24 +47,22 @@ grafana:
 
 # 4) Loki 설정
 loki:
-  # ────────────────────────────────────────────────
-  # 1) commonConfig 빈 테이블로 정의 → 헬퍼 분기 통과
+  # 1) commonConfig를 빈 테이블로 정의 → 헬퍼는 여기서 분기 통과
   commonConfig: {}
 
-  # 2) enterprise 완전 비활성화
+  # 2) enterprise 기능 완전 비활성화 → tpl 호출 방지
   enterprise:
     enabled: false
     config: {}
 
-  # 3) persistence (PVC) 옵션
+  # 3) persistence 등 나머지 설정...
   persistence:
     enabled: true
-    storageClassName: standard    # 실제 클러스터 스토리지 클래스 이름으로 변경
+    storageClassName: standard
     accessModes:
       - ReadWriteOnce
     size: 10Gi
 
-  # 4) Ingress 설정 (chart 문서 대로)
   ingress:
     enabled: true
     hosts:
@@ -73,12 +71,10 @@ loki:
           - path: /
             pathType: ImplementationSpecific
 
-  # 5) Loki 서버 설정
   config:
     auth_enabled: false
     server:
       http_listen_port: 3100
-
     schema_config:
       configs:
         - from: 2020-10-24
@@ -88,7 +84,6 @@ loki:
           index:
             prefix: index_
             period: 168h
-
     ruler:
       storage:
         type: local
