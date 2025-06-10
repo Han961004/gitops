@@ -1,0 +1,20 @@
+apiVersion: v2
+name: monitoring-stack
+description: A Helm chart that installs Loki, Prometheus, Grafana, and NGINX
+type: application
+version: 0.1.0
+appVersion: "1.0"
+
+dependencies:
+  - name: loki
+    version: 5.42.0
+    repository: https://grafana.github.io/helm-charts
+  - name: prometheus
+    version: 25.21.0
+    repository: https://prometheus-community.github.io/helm-charts
+  - name: grafana
+    version: 7.3.9
+    repository: https://grafana.github.io/helm-charts
+  - name: nginx
+    version: 15.0.0
+    repository: https://charts.bitnami.com/bitnami

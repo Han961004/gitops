@@ -1,0 +1,42 @@
+loki:
+  enabled: true
+  fullnameOverride: loki
+  isDefault: true
+  loki:
+    config:
+      auth_enabled: false
+
+prometheus:
+  enabled: true
+  server:
+    global:
+      scrape_interval: 15s
+    persistentVolume:
+      enabled: false
+
+grafana:
+  enabled: true
+  adminPassword: "admin"  # 개발환경에서는 기본 비밀번호 사용 가능
+  service:
+    type: ClusterIP
+  persistence:
+    enabled: false
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          url: http://prometheus-server
+        - name: Loki
+          type: loki
+          access: proxy
+          url: http://loki:3100
+
+nginx:
+  enabled: true
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: false
