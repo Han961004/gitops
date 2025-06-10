@@ -47,15 +47,13 @@ grafana:
 
 # 4) Loki 설정
 loki:
-  # enable the Loki chart's native PVC-based persistence
   persistence:
     enabled: true
-    storageClassName: "standard"   # your cluster's StorageClass
+    storageClassName: standard
     accessModes:
       - ReadWriteOnce
     size: 10Gi
 
-  # ingress, resources, etc. as before
   ingress:
     enabled: true
     hosts:
@@ -64,7 +62,6 @@ loki:
           - path: /
             pathType: ImplementationSpecific
 
-  # any other loki.* overrides you actually need
   config:
     auth_enabled: false
     server:
@@ -78,8 +75,3 @@ loki:
           index:
             prefix: index_
             period: 168h
-    ruler:
-      storage:
-        type: local
-        local:
-          directory: /data/loki/rules
