@@ -47,13 +47,16 @@ grafana:
 
 # 4) Loki 설정
 loki:
+  commonConfig: {}
+  enterprise:
+    enabled: false
+    config: {}
   persistence:
     enabled: true
     storageClassName: standard
     accessModes:
       - ReadWriteOnce
     size: 10Gi
-
   ingress:
     enabled: true
     hosts:
@@ -61,7 +64,6 @@ loki:
         paths:
           - path: /
             pathType: ImplementationSpecific
-
   config:
     auth_enabled: false
     server:
