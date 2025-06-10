@@ -47,11 +47,15 @@ grafana:
 
 # 4) Loki 설정
 loki:
-  ingress:
-    enabled: true
-    hosts:
-      - loki.example.com
+  # (기존 ingress 등 다른 설정은 그대로 두시고 아래만 추가/변경)
   config:
-    table_manager:
-      retention_deletes_enabled: true
-      retention_period: 24h
+    # ... (schema_config, rulerConfig 등 기존 config 설정)
+    storage_config:
+      boltdb_shipper:
+        # 인덱스 데이터를 저장할 로컬 디렉토리
+        active_index_directory: /data/loki/index
+        # BoltDB-Shipper가 공유 스토어로 사용할 모드 설정
+        shared_store: filesystem
+      filesystem:
+        # 청크(chunk) 파일을 저장할 로컬 디렉토리
+        directory: /data/loki/chunks
