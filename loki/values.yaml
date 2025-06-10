@@ -23,3 +23,7 @@ loki:
     limits:
       cpu: 200m
       memory: 256Mi
+
+  monitoring:
+    selfMonitoring:
+      enabled: false
