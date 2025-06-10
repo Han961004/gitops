@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   grafana:
   - apiVersion: v2
-    created: "2025-06-10T12:59:16.970794978+09:00"
+    created: "2025-06-10T13:01:23.268385831+09:00"
     dependencies:
     - name: grafana
       repository: https://grafana.github.io/helm-charts
@@ -16,7 +16,7 @@ entries:
   loki:
   - apiVersion: v2
     appVersion: 2.9.3
-    created: "2025-06-10T12:59:16.987155507+09:00"
+    created: "2025-06-10T13:01:23.282839269+09:00"
     description: Loki - direct Helm chart
     digest: 3af653c6c11dbddc5b72f06b825c0202017c2d0912900e0eefd37edaa30d901a
     name: loki
@@ -27,7 +27,7 @@ entries:
   loki-stack:
   - apiVersion: v2
     appVersion: 2.9.0
-    created: "2025-06-10T12:59:16.997670278+09:00"
+    created: "2025-06-10T13:01:23.292198919+09:00"
     dependencies:
     - name: loki
       repository: https://grafana.github.io/helm-charts
@@ -41,7 +41,7 @@ entries:
     version: 0.1.0
   nginx:
   - apiVersion: v2
-    created: "2025-06-10T12:59:17.002476341+09:00"
+    created: "2025-06-10T13:01:23.297887469+09:00"
     dependencies:
     - name: ingress-nginx
       repository: https://kubernetes.github.io/ingress-nginx
@@ -54,7 +54,7 @@ entries:
     version: 0.1.0
   prometheus:
   - apiVersion: v2
-    created: "2025-06-10T12:59:17.009133686+09:00"
+    created: "2025-06-10T13:01:23.304203326+09:00"
     dependencies:
     - name: prometheus
       repository: https://prometheus-community.github.io/helm-charts
@@ -65,4 +65,4 @@ entries:
     urls:
     - https://han961004.github.io/gitops/prometheus-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-10T12:59:16.967933761+09:00"
+generated: "2025-06-10T13:01:23.265639135+09:00"
