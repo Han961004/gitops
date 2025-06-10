@@ -20,10 +20,12 @@ config:
     http_listen_port: 3100
   ingester:
     lifecycler:
-      address: 127.0.0.1
       ring:
         kvstore:
           store: inmemory
+  compactor:
+    working_directory: /loki/compactor        # ← 추가
+    shared_store: filesystem
   schema_config:
     configs:
       - from: 2020-10-24
