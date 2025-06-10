@@ -1,0 +1,32 @@
+replicaCount: 1
+
+image:
+  repository: grafana/grafana
+  tag: 9.5.2
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  hosts:
+    - host: grafana.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+adminUser: admin
+adminPassword: admin123
+
+datasources:
+  enabled: true
+  config:
+    apiVersion: 1
+    datasources:
+      - name: Loki
+        type: loki
+        url: http://{{ include "loki.fullname" . }}:3100
+        access: proxy
+        isDefault: true

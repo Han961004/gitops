@@ -1,0 +1,47 @@
+replicaCount: 1
+
+image:
+  repository: grafana/loki
+  tag: 2.8.2
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3100
+
+persistence:
+  enabled: true
+  size: 10Gi
+  storageClass: "standard"
+
+config:
+  auth_enabled: false
+  server:
+    http_listen_port: 3100
+  ingester:
+    wal:
+      enabled: true
+      dir: /loki/wal
+    lifecycler:
+      ring:
+        kvstore:
+          store: inmemory
+  compactor:
+    working_directory: /loki/compactor        # ← 추가
+    shared_store: filesystem
+  schema_config:
+    configs:
+      - from: 2020-10-24
+        store: boltdb-shipper
+        object_store: filesystem
+        schema: v11
+        index:
+          prefix: index_
+          period: 24h
+  storage_config:
+    boltdb_shipper:
+      active_index_directory: /loki/index
+      cache_location: /loki/cache
+      shared_store: filesystem
+    filesystem:
+      directory: /loki/chunks

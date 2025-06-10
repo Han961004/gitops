@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: prom/prometheus
+  tag: v2.46.0
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 9090
+
+server:
+  config:
+    global:
+      scrape_interval: 15s
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+      - job_name: 'kubernetes-nodes'
+        kubernetes_sd_configs:
+          - role: node
+        relabel_configs:
+          - source_labels: [__address__]
+            regex: '(.*):10250'
+            replacement: '${1}:9100'
+            target_label: __address__
+
+ingress:
+  enabled: true
+  hosts:
+    - host: prometheus.local
+      paths:
+        - path: /
+          pathType: Prefix

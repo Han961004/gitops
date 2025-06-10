@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "grafana.fullname" . }}
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "grafana.fullname" . }}
+  template:
+    metadata:
+      labels:
+        {{- include "grafana.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: grafana
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: GF_SECURITY_ADMIN_USER
+              value: "{{ .Values.adminUser }}"
+            - name: GF_SECURITY_ADMIN_PASSWORD
+              value: "{{ .Values.adminPassword }}"
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: config
+              mountPath: /etc/grafana/provisioning/datasources
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "grafana.fullname" . }}-datasources
+---
+{{- if .Values.datasources.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "grafana.fullname" . }}-datasources
+data:
+  datasources.yaml: |
+{{ toYaml .Values.datasources.config | indent 4 }}
+{{- end }}
