@@ -16,3 +16,11 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
+
+ingress:
+  enabled: true
+  hosts:
+    - host: prometheus.local
+      paths:
+        - path: /
+          pathType: Prefix

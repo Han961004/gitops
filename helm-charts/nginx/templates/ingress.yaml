@@ -2,7 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "nginx.fullname" . }}
+  name: {{ include "prometheus.fullname" . }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     {{- range .Values.ingress.hosts }}
@@ -14,7 +16,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "nginx.fullname" $ }}
+                name: {{ include "prometheus.fullname" $ }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
