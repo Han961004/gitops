@@ -28,10 +28,16 @@ spec:
               mountPath: /etc/loki
             - name: data
               mountPath: /loki
+            - name: compactor
+              mountPath: /loki/compactor
+
       volumes:
         - name: config
           configMap:
             name: {{ include "loki.fullname" . }}
+        - name: compactor
+          emptyDir: {}
+
   volumeClaimTemplates:
     - metadata:
         name: data
