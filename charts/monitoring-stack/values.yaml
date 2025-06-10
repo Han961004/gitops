@@ -15,12 +15,20 @@ prometheus:
     ingress:
       enabled: true
       hosts:
-        - prometheus.example.com
+        - host: prometheus.example.com
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+
   server:
     ingress:
       enabled: true
       hosts:
-        - prometheus.example.com
+        - host: prometheus.example.com
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+
 
 # 3) Grafana 설정
 grafana:
