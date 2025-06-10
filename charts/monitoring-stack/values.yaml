@@ -19,7 +19,6 @@ prometheus:
           paths:
             - path: /
               pathType: ImplementationSpecific
-
   server:
     ingress:
       enabled: true
@@ -28,7 +27,6 @@ prometheus:
           paths:
             - path: /
               pathType: ImplementationSpecific
-
 
 # 3) Grafana 설정
 grafana:
@@ -45,17 +43,13 @@ grafana:
       enabled: true
       defaultDatasourceEnabled: true
 
-# 4) Loki 설정
-loki:
-  # 1) commonConfig를 빈 테이블로 정의 → 헬퍼는 여기서 분기 통과
-  commonConfig: {}
-
-  # 2) enterprise 기능 완전 비활성화 → tpl 호출 방지
+# 4) Loki-Stack 설정
+loki-stack:
+  commonConfig: {}    # optional, helm-chart 버전에 따라 필요할 수 있습니다
   enterprise:
     enabled: false
     config: {}
 
-  # 3) persistence 등 나머지 설정...
   persistence:
     enabled: true
     storageClassName: standard
