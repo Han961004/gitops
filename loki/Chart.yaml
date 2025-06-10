@@ -1,6 +1,11 @@
 apiVersion: v2
-name: loki
-description: Loki - direct Helm chart
+name: loki-stack
+description: Loki helm dependency chart for Argo CD
 type: application
-version: 0.1.0   # 반드시 아래 .tgz와 동일
-appVersion: 2.9.3
+version: 0.1.0
+appVersion: "2.9.0"
+
+dependencies:
+  - name: loki
+    version: 5.42.0
+    repository: https://grafana.github.io/helm-charts

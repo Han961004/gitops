@@ -1,27 +1,25 @@
 loki:
-  storage:
-    bucketNames:
-      chunks: dummy-chunks
-      ruler: dummy-ruler
-      admin: dummy-admin
-
-  auth_enabled: false
-
-  storage_config:
-    boltdb:
-      directory: /var/loki/index
-    filesystem:
-      directory: /var/loki/chunks
-
-  schema_config:
-    configs:
-      - from: 2024-06-10
-        store: boltdb
-        object_store: filesystem
-        schema: v11
-        index:
-          prefix: index_
-          period: 168h
-
+  fullnameOverride: loki
   commonConfig:
     replication_factor: 1
+
+  storage:
+    type: filesystem
+
+  persistence:
+    enabled: true
+    storageClassName: standard
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+
+  service:
+    type: ClusterIP
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi

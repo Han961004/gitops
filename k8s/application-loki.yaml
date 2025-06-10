@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://han961004.github.io/gitops
-    chart: loki
+    chart: loki-stack
     targetRevision: 0.1.0
     helm:
       valueFiles:
@@ -19,3 +19,5 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
