@@ -27,9 +27,10 @@ prometheus:
     ingress:
       enabled: true
       hosts:
-        - prometheus.example.com
-      path: /
-      pathType: ImplementationSpecific
+        - host: prometheus.example.com   # ← map[string]string
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
 
 # 3) Grafana 설정
 grafana:
