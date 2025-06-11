@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image:
+  repository: donghk77/literature
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8000
+
+resources: {}
