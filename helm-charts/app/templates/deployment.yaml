@@ -17,6 +17,13 @@ spec:
         app.kubernetes.io/name: {{ include "app.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: migrate
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          command: ["python", "manage.py", "migrate"]
+          env:
+            - name: DATABASE_URL
+              value: "postgres://postgres:0000@postgres:5432/literature"
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -24,3 +31,6 @@ spec:
           ports:
             - containerPort: {{ .Values.service.port }}
               name: http
+      volumes:
+        - name: app-volume
+          emptyDir: {}
