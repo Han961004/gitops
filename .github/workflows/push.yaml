@@ -1,0 +1,41 @@
+name: Push Docker Image
+
+# 'Build Docker Image' 워크플로가 완료되었을 때 트리거됨
+on:
+  workflow_run:
+    workflows: ["Build Docker Image"]
+    types: [completed]
+
+jobs:
+  push:
+    # Build 워크플로가 성공했을 때만 실행
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # GitHub Actions artifact에서 빌드된 Docker 이미지 파일을 다운로드
+      - name: Download image artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image         # artifact 이름 (build.yaml에서 지정한 이름)
+          path: .                    # 현재 디렉토리에 다운로드
+
+      # 압축된 tar 파일에서 Docker 이미지를 복원
+      - name: Load Docker image
+        run: |
+          gunzip -c image.tar.gz | docker load
+
+      # Docker Hub에 로그인 (Secrets에 저장된 사용자명과 비밀번호 사용)
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      # Docker 이미지를 태그하고 Docker Hub에 push
+      - name: Tag and push image
+        run: |
+          IMAGE=mydockerhub/myapp          # 이미지 이름
+          TAG=${GITHUB_SHA}                # Git 커밋 해시를 태그로 사용
+          docker tag $IMAGE:$TAG $IMAGE:$TAG
+          docker push $IMAGE:$TAG

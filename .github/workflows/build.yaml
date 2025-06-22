@@ -1,0 +1,41 @@
+name: Build Docker Image
+
+# 'Lint' 워크플로가 완료되었을 때 실행되는 워크플로
+on:
+  workflow_run:
+    workflows: ["Lint"]
+    types: [completed]
+
+jobs:
+  build:
+    # Lint 워크플로가 성공했을 때만 실행
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # 저장소의 코드를 체크아웃
+      - uses: actions/checkout@v3
+
+      # 현재 Git 커밋 해시를 TAG로 설정하고 환경 변수에 저장
+      - name: Set image tag
+        id: set_tag
+        run: echo "TAG=${GITHUB_SHA}" >> $GITHUB_ENV
+
+      # Docker 이미지를 빌드 (예: mydockerhub/myapp:abcdef123456)
+      - name: Build Docker image
+        run: |
+          IMAGE=mydockerhub/myapp
+          docker build -t $IMAGE:$TAG .
+
+      # 빌드한 이미지를 tar.gz 파일로 저장 (압축된 형태로 저장)
+      - name: Save image to archive
+        run: |
+          IMAGE=mydockerhub/myapp
+          docker save $IMAGE:$TAG | gzip > image.tar.gz
+
+      # GitHub Actions에서 다음 워크플로(push.yaml 등)가 사용할 수 있도록 아티팩트 업로드
+      - name: Upload image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: image.tar.gz
