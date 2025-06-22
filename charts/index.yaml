@@ -1,0 +1,58 @@
+apiVersion: v1
+entries:
+  app:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-06-11T17:30:09.328206464+09:00"
+    description: A Helm chart for deploying a DRF app
+    digest: 2a201cd0c84c6937984dc2ce0e590a40d89faef187a453ca137d5fcefffee9ed
+    name: app
+    type: application
+    urls:
+    - https://han961004.github.io/gitops/charts/app-0.1.0.tgz
+    version: 0.1.0
+  grafana:
+  - apiVersion: v2
+    appVersion: 9.5.2
+    created: "2025-06-11T17:30:09.328464218+09:00"
+    description: Grafana dashboard and visualization
+    digest: 60af6567ff0ce6fd17845260f79d618f5c88a42be8bd8461ba116c43da41b8a2
+    name: grafana
+    type: application
+    urls:
+    - https://han961004.github.io/gitops/charts/grafana-0.1.0.tgz
+    version: 0.1.0
+  loki:
+  - apiVersion: v2
+    appVersion: 2.8.2
+    created: "2025-06-11T17:30:09.328832683+09:00"
+    description: Loki for log aggregation
+    digest: 725e4c1af5a4239dcbf85ddcbe942b77afa36ffa5a4868f7012c4eebefe565d2
+    name: loki
+    type: application
+    urls:
+    - https://han961004.github.io/gitops/charts/loki-0.1.0.tgz
+    version: 0.1.0
+  nginx:
+  - apiVersion: v2
+    appVersion: 1.23.1
+    created: "2025-06-11T17:30:09.329088665+09:00"
+    description: A simple NGINX ingress/service deployment
+    digest: 0d37bf8c4607648b1790d3c899169bd4fc4bb9d6d7ad725ecc5fe63eb0c84cc0
+    name: nginx
+    type: application
+    urls:
+    - https://han961004.github.io/gitops/charts/nginx-0.1.0.tgz
+    version: 0.1.0
+  prometheus:
+  - apiVersion: v2
+    appVersion: 2.46.0
+    created: "2025-06-11T17:30:09.329359909+09:00"
+    description: Kubernetes Prometheus server + Alertmanager
+    digest: ede1d7caffc3a9b8f76b4729015bdb173054053930496daf1b0c65d0496b9858
+    name: prometheus
+    type: application
+    urls:
+    - https://han961004.github.io/gitops/charts/prometheus-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-06-11T17:30:09.327005968+09:00"
