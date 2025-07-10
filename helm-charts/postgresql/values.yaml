@@ -2,3 +2,7 @@ postgresql:
   database: literature
   username: postgres
   password: "0000"
+
+service:
+  type: ClusterIP
+  port: 5432
