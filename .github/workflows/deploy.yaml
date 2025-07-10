@@ -21,11 +21,11 @@ jobs:
           git config user.name "My_Name"
           git config user.email "My_Email@github.com"
 
-      # 동작 흐름 예시
-      # drf-backend 레포에서 새로운 커밋 → CI가 Docker 이미지 빌드 + push (donghk77/literature:abc123)
-      # → 이 빌드된 이미지의 태그를 gitops 레포의 values.yaml로 업데이트
-      # → Git에 푸시
-      # → Argo CD가 Git 변경 감지 → 새 이미지로 자동 배포
+        # 동작 흐름 예시
+        # drf-backend 레포에서 새로운 커밋 → CI가 Docker 이미지 빌드 + push (donghk77/literature:abc123)
+        # → 이 빌드된 이미지의 태그를 gitops 레포의 values.yaml로 업데이트
+        # → Git에 푸시
+        # → Argo CD가 Git 변경 감지 → 새 이미지로 자동 배포
       - name: Update Helm image tag
         run: |
           cd helm-charts/app

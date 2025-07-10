@@ -1,11 +1,7 @@
 apiVersion: v2
 name: postgresql
-description: A Helm chart for deploying PostgreSQL on Kubernetes
-
-type: application
-version: 0.1.0       # Helm Chart 버전
-appVersion: "14"     # 실제 PostgreSQL 버전
-
-maintainers:
-  - name: han961004
-    email: your@email.com
+version: 0.1.0
+dependencies:
+  - name: postgresql
+    version: 12.1.6
+    repository: https://charts.bitnami.com/bitnami

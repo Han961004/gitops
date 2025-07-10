@@ -1,26 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "postgresql.fullname" . }}
+  name: {{ include "app.fullname" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "postgresql.name" . }}
+      app: {{ include "app.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "postgresql.name" . }}
+        app: {{ include "app.name" . }}
     spec:
       containers:
-        - name: postgres
-          image: postgres:14
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
           ports:
-            - containerPort: 5432
+            - containerPort: {{ .Values.service.port }}
           env:
-            - name: POSTGRES_DB
-              value: {{ .Values.postgresql.database }}
-            - name: POSTGRES_USER
-              value: {{ .Values.postgresql.username }}
-            - name: POSTGRES_PASSWORD
-              value: {{ .Values.postgresql.password }}
+            - name: DATABASE_URL
+              value: "postgres://postgres:0000@postgres:5432/literature"

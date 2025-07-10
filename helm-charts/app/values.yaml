@@ -10,3 +10,7 @@ service:
   port: 8000
 
 resources: {}
+
+env:
+  - name: DATABASE_URL
+    value: "postgres://postgres:0000@postgres:5432/literature"
