@@ -1,7 +1,14 @@
+replicaCount: 1
+
+image:
+  repository: postgres
+  tag: "14"
+  pullPolicy: IfNotPresent
+
 postgresql:
-  database: literature
   username: postgres
   password: "0000"
+  database: literature
 
 service:
   type: ClusterIP

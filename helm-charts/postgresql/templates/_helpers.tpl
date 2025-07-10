@@ -1,9 +1,7 @@
-{{/* Define "app.name" */}}
-{{- define "app.name" -}}
+{{- define "postgresql.name" -}}
 {{ .Chart.Name }}
 {{- end }}
 
-{{/* Define "app.fullname" */}}
-{{- define "app.fullname" -}}
+{{- define "postgresql.fullname" -}}
 {{ printf "%s-%s" .Release.Name .Chart.Name }}
 {{- end }}
