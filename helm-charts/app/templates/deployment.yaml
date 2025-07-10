@@ -22,8 +22,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           command: ["python", "manage.py", "migrate"]
           env:
-            - name: DATABASE_URL
-              value: "postgres://postgres:0000@postgres:5432/literature"
+            {{- toYaml .Values.env | nindent 6 }}
+
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -33,8 +33,8 @@ spec:
             - containerPort: {{ .Values.service.port }}
               name: http
           env:
-            - name: DATABASE_URL
-              value: "postgres://postgres:0000@postgres:5432/literature"
+            {{- toYaml .Values.env | nindent 6 }}
+
       volumes:
         - name: app-volume
           emptyDir: {}
