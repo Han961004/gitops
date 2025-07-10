@@ -1,9 +1,8 @@
-name: Deploy via ArgoCD GitOps
+name: Run Deploy
 
-# push가 끝났을 때 배포 트리거
 on:
   workflow_run:
-    workflows: ["Push Docker Image"]
+    workflows: ["Build & Push Docker Image"]
     types: [completed]
 
 jobs:
@@ -12,21 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # GitOps 저장소 (또는 동일 레포 내 Helm charts) 체크아웃
-      - uses: actions/checkout@v3
+      - name: CI Deploy Start
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # values.yaml에 이미지 태그 업데이트
+
+
+
+
+          
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
       - name: Update Helm image tag
         run: |
           cd helm-charts/app
-          sed -i "s|repository: .*|repository: mydockerhub/myapp|" values.yaml
+
+          # values.yaml에서 이미지 정보 갱신
+          sed -i "s|repository: .*|repository: ${{ secrets.DOCKER_HUB_USERNAME }}/gitops|" values.yaml
           sed -i "s|tag: .*|tag: ${{ github.sha }}|" values.yaml
 
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git commit -am "Update image tag to ${{ github.sha }}"
+          # 변경 확인
+          git add values.yaml
+          git commit -m "Update image tag to ${{ github.sha }}"
           git push
-
-      # 여기서 ArgoCD는 Git 변경을 감지하고 자동 배포 수행

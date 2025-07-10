@@ -11,13 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # GitHub 리포지토리의 코드 체크아웃
-      - uses: actions/checkout@v3
-
-      # 예: Node.js 프로젝트의 경우
+      - name: CI Test Start
+        uses: actions/checkout@v3 # Code Checkout
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4 # runner 상에서 python 설치
+        with:
+          python-version: '3.11'
+      
       - name: Install dependencies
-        run: npm ci
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      # 테스트 실행
       - name: Run tests
-        run: npm test
+        run: python manage.py test
+
+      # 커버리지 추가?
+
+      # 복잡한 의존 환경 추가? DB나 Redis

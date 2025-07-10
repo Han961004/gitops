@@ -4,6 +4,14 @@
 
 ---
 
+# Trigger Flow
+
+Run test -> Build Docker image           -> Push DOcker images -> Deploy via ArgoCD
+
+
+
+
+
 ## 📁 구성 요소
 
 | 구성 요소           | 설명 |
