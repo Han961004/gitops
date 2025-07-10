@@ -15,11 +15,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configure Git
+      
+      - name: Configure Git # 작성자 식별
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.name "My_Name"
+          git config user.email "My_Email@github.com"
 
       - name: Update Helm image tag
         run: |
