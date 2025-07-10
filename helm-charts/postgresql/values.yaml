@@ -1,0 +1,4 @@
+postgresql:
+  database: literature
+  username: postgres
+  password: "0000"
