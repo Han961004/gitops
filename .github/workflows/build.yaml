@@ -1,13 +1,13 @@
 name: Build & Push Docker Image
 
 on:
-  workflow_run:
-    workflows: ["Run Tests"]
-    types: [completed]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -26,26 +26,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_PASSWORD  }}
       
       - name: Build Docker image
-        run: docker build -t $IMAGE:$TAG
+        run: docker build -t $IMAGE:$TAG .
 
       - name: Push Docker image
         run: docker push $IMAGE:$TAG
-
-
-
-
-
-
-        
-      # 빌드한 이미지를 tar.gz 파일로 저장 (압축된 형태로 저장)
-      - name: Save image to archive
-        run: |
-          IMAGE=mydockerhub/myapp
-          docker save $IMAGE:$TAG | gzip > image.tar.gz
-
-      # GitHub Actions에서 다음 워크플로(push.yaml 등)가 사용할 수 있도록 아티팩트 업로드
-      - name: Upload image artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: docker-image
-          path: image.tar.gz
