@@ -1,6 +1,4 @@
-# GitOps Kubernetes Infra Repository
-
-이 저장소는 Argo CD 기반 GitOps 방식으로 Kubernetes 인프라 리소스를 선언적으로 관리합니다.
+GitOps Kubernetes Infra - 이 저장소는 Argo CD 기반 GitOps 방식으로 Kubernetes 인프라 리소스를 선언적으로 관리합니다.
 
 ## 구성 요소
 
